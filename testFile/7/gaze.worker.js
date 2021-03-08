@@ -86,8 +86,10 @@ this.onmessage = function(e) {
       Module["buffer"] = Module["wasmMemory"].buffer;
       Module["ENVIRONMENT_IS_PTHREAD"] = true;
       if (typeof e.data.urlOrBlob === "string") {
+        console.log('e.data.urlOrBlob is string')
         importScripts(e.data.urlOrBlob);
       } else {
+        console.log('e.data.urlOrBlob is not string')
         var objectUrl = URL.createObjectURL(e.data.urlOrBlob);
         importScripts(objectUrl);
         URL.revokeObjectURL(objectUrl);
