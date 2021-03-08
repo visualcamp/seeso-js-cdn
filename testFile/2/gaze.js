@@ -1684,11 +1684,31 @@ var PThread = {
   allocateUnusedWorker: function() {
     var pthreadMainJs = locateFile("gaze.worker.js");
     console.log('pthreadMainJs :', pthreadMainJs)
-    const workerResponse = await fetch('https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/simd-pthread/gaze.worker.js');
-    const workerJS = await workerResponse.text();
-    const blob = new Blob([workerJS], { type: 'application/javascript' })
-    PThread.unusedWorkers.push(new Worker(URL.createObjectURL(blob)));
+    // fetch('https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/simd-pthread/gaze.worker.js', { credentials: 'cross-origin' })
+    //   .then()
+    // const workerResponse = await fetch('https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/simd-pthread/gaze.worker.js');
+    // const workerJS = await workerResponse.text();
+    // const blob = new Blob([workerJS], { type: 'application/javascript' })
+    // PThread.unusedWorkers.push(new Worker(URL.createObjectURL(blob)));
     // PThread.unusedWorkers.push(new Worker(pthreadMainJs));
+
+    fetch('https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/simd-pthread/gaze.worker.js')
+      .then((e) => [e.clone().text(), e.blob()])
+      .then((e) => {
+          // console.log(e);
+          Promise.all(e).then((e) => {
+            datas.push({text: e[0], blob: e[1]});
+          })
+            .then(() => {
+              datas.forEach((e) => {
+                console.log('e blob? : ', e)
+                // this.worker = new Worker(URL.createObjectURL(e.blob))
+                PThread.unusedWorkers.push(new Worker(URL.createObjectURL(e.blob)));
+
+              })
+            })
+        }
+      )
   },
   getNewWorker: function() {
     if (PThread.unusedWorkers.length == 0) {
