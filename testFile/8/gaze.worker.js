@@ -192,6 +192,7 @@ if (
     eval.call(null, x);
   }
   importScripts = function(f) {
+    console.log('importScript f:', f);
     globalEval(nodeRead(f));
   };
   postMessage = function(msg) {

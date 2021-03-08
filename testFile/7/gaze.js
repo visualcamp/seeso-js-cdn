@@ -983,7 +983,7 @@ function createExportWrapper(name, fixedasm) {
   };
 }
 // var wasmBinaryFile = "gaze.wasm";
-var wasmBinaryFile = "https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/testFile/4/gaze.wasm";
+var wasmBinaryFile = "https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/simd-pthread/gaze.wasm";
 if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
   console.log('wasmBinaryFile:', wasmBinaryFile);
