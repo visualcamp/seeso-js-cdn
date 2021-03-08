@@ -1,23 +1,3 @@
-// var Module = typeof Module !== "undefined" ? Module : {};
-
-// if(typeof Module["locateFile"] == "undefined")
-//   Module["locateFile"] = function(path, dir)
-//   {
-//     var dirRoot = "", dirJS = "";
-//     // Inside a WebWorker
-//     if(typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope)
-//       dirJS = self.location.href;
-//     // In the main thread
-//     else if(document.currentScript)
-//       dirJS = document.currentScript.src;
-//
-//     dirRoot = dirJS.substring(0, dirJS.lastIndexOf("/") + 1);
-//     console.log('locateFile :', dirRoot, path)
-//     return dirRoot + path;
-//   }
-// if(typeof Module["thisProgram"] == "undefined")
-//   Module["thisProgram"] = "./testFile";
-
 var Module = typeof Module !== "undefined" ? Module : {};
 var moduleOverrides = {};
 var key;
