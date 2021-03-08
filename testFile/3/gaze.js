@@ -1691,7 +1691,7 @@ var PThread = {
     // const blob = new Blob([workerJS], { type: 'application/javascript' })
     // PThread.unusedWorkers.push(new Worker(URL.createObjectURL(blob)));
     // PThread.unusedWorkers.push(new Worker(pthreadMainJs));
-
+    const datas = [];
     fetch('https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/simd-pthread/gaze.worker.js')
       .then((e) => [e.clone().text(), e.blob()])
       .then((e) => {
