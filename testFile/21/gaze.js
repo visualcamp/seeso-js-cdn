@@ -58,6 +58,7 @@ if (ENVIRONMENT_IS_WORKER) {
 }
 console.log('is worker : ', ENVIRONMENT_IS_WORKER)
 console.log('is pthread : ', ENVIRONMENT_IS_PTHREAD)
+console.log('is web : ', ENVIRONMENT_IS_WEB)
 var scriptDirectory = "";
 function locateFile(path) {
   if (Module["locateFile"]) {
