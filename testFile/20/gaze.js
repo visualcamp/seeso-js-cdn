@@ -1,19 +1,19 @@
 var Module = typeof Module !== "undefined" ? Module : {};
-if(typeof Module["locateFile"] == "undefined")
-  Module["locateFile"] = function(path, dir)
-  {
-    var dirRoot = "", dirJS = "";
-    // Inside a WebWorker
-    if(typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope)
-      dirJS = self.location.href;
-    // In the main thread
-    else if(document.currentScript)
-      dirJS = document.currentScript.src;
-
-    dirRoot = dirJS.substring(0, dirJS.lastIndexOf("/") + 1);
-
-    return dirRoot + path;
-  }
+// if(typeof Module["locateFile"] == "undefined")
+//   Module["locateFile"] = function(path, dir)
+//   {
+//     var dirRoot = "", dirJS = "";
+//     // Inside a WebWorker
+//     if(typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope)
+//       dirJS = self.location.href;
+//     // In the main thread
+//     else if(document.currentScript)
+//       dirJS = document.currentScript.src;
+//
+//     dirRoot = dirJS.substring(0, dirJS.lastIndexOf("/") + 1);
+//
+//     return dirRoot + path;
+//   }
 var moduleOverrides = {};
 var key;
 for (key in Module) {
@@ -56,6 +56,8 @@ if (ENVIRONMENT_IS_WORKER) {
 } else if (ENVIRONMENT_IS_NODE) {
   _scriptDir = __filename;
 }
+console.log('is worker : ', ENVIRONMENT_IS_WORKER)
+console.log('is pthread : ', ENVIRONMENT_IS_PTHREAD)
 var scriptDirectory = "";
 function locateFile(path) {
   if (Module["locateFile"]) {
