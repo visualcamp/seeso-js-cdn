@@ -1574,7 +1574,7 @@ var PThread = {
   loadWasmModuleToWorker: function(worker, onFinishedLoading) {
     console.log('loadWasmModuleToWorker :', worker)
     worker.onmessage = function(e) {
-      console.log('onmessage : e? ', e)
+      console.log('onmessage : 1 ')
       var d = e["data"];
       var cmd = d["cmd"];
       if (worker.pthread)

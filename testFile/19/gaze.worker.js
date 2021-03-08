@@ -80,6 +80,7 @@ function moduleLoaded() {
   postMessage({ cmd: "loaded" });
 }
 this.onmessage = function(e) {
+  console.log('worker onmessage : 2')
   try {
     if (e.data.cmd === "load") {
       Module["wasmModule"] = e.data.wasmModule;
