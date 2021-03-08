@@ -16,7 +16,7 @@ if(typeof Module["locateFile"] == "undefined")
     return dirRoot + path;
   }
 if(typeof Module["thisProgram"] == "undefined")
-  Module["thisProgram"] = "./samtools";
+  Module["thisProgram"] = "./testFile";
 
 var Module = typeof Module !== "undefined" ? Module : {};
 var moduleOverrides = {};
