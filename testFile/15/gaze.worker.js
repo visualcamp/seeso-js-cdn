@@ -1,54 +1,55 @@
-MSG_UUID = null;
-
-// Stdout/stderr indexed by message uuid
-STDOUT = {};
-STDERR = {};
-
-// Files mounted and paths
-FILES = [];
-DIR_DATA_FILES = "/data";
-DIR_DATA_URLS = "/urls";
-
-// Initialization -- two conditions for this worker to be ready:
-//   1) Got UUID from Main Thread that it sent with the "init" message
-//   2) Wasm module is initialized
-resolveInitWasm = null;
-resolveInitWorker = null;
-promiseInitWasm = new Promise(resolve => resolveInitWasm = resolve);
-promiseInitWorker = new Promise(resolve => resolveInitWorker = resolve);
-Promise.all([ promiseInitWasm, promiseInitWorker ])
-  .then(() => send(MSG_UUID, "ready"));
-
+// MSG_UUID = null;
+//
+// // Stdout/stderr indexed by message uuid
+// STDOUT = {};
+// STDERR = {};
+//
+// // Files mounted and paths
+// FILES = [];
+// DIR_DATA_FILES = "/data";
+// DIR_DATA_URLS = "/urls";
+//
+// // Initialization -- two conditions for this worker to be ready:
+// //   1) Got UUID from Main Thread that it sent with the "init" message
+// //   2) Wasm module is initialized
+// resolveInitWasm = null;
+// resolveInitWorker = null;
+// promiseInitWasm = new Promise(resolve => resolveInitWasm = resolve);
+// promiseInitWorker = new Promise(resolve => resolveInitWorker = resolve);
+// Promise.all([ promiseInitWasm, promiseInitWorker ])
+//   .then(() => send(MSG_UUID, "ready"));
+//
+// var Module = {};
+// Module = {
+//   // When the module is initialized, resolve the initWasm promise
+//   onRuntimeInitialized: () => {
+//     // Setup folders
+//     FS.mkdir(DIR_DATA_FILES, 0o777);
+//     FS.mkdir(DIR_DATA_URLS, 0o777);
+//     // Resolve promise
+//     resolveInitWasm();
+//   },
+//
+//   // Load .wasm/.data files from a custom path
+//   locateFile: (path, dir) => {
+//     var dirRoot = "";
+//
+//     // Use hardcoded path if `BIOWASM_URL` was defined when creating WebWorker script
+//     if(typeof BIOWASM_URL !== 'undefined')
+//       dirRoot = BIOWASM_URL;
+//     // Or infer it from the path to the JS file
+//     else {
+//       var dirJS = self.location.href;
+//       dirRoot = dirJS.substring(0, dirJS.lastIndexOf("/") + 1);
+//     }
+//     return dirRoot + path;
+//   },
+//
+//   // Setup print functions to store stdout/stderr based on id
+//   print: text => STDOUT[MSG_UUID] += `${text}\n`,
+//   printErr: text => STDERR[MSG_UUID] += `${text}\n`
+// }
 var Module = {};
-Module = {
-  // When the module is initialized, resolve the initWasm promise
-  onRuntimeInitialized: () => {
-    // Setup folders
-    FS.mkdir(DIR_DATA_FILES, 0o777);
-    FS.mkdir(DIR_DATA_URLS, 0o777);
-    // Resolve promise
-    resolveInitWasm();
-  },
-
-  // Load .wasm/.data files from a custom path
-  locateFile: (path, dir) => {
-    var dirRoot = "";
-
-    // Use hardcoded path if `BIOWASM_URL` was defined when creating WebWorker script
-    if(typeof BIOWASM_URL !== 'undefined')
-      dirRoot = BIOWASM_URL;
-    // Or infer it from the path to the JS file
-    else {
-      var dirJS = self.location.href;
-      dirRoot = dirJS.substring(0, dirJS.lastIndexOf("/") + 1);
-    }
-    return dirRoot + path;
-  },
-
-  // Setup print functions to store stdout/stderr based on id
-  print: text => STDOUT[MSG_UUID] += `${text}\n`,
-  printErr: text => STDERR[MSG_UUID] += `${text}\n`
-}
 function assert(condition, text) {
   if (!condition) abort("Assertion failed: " + text);
 }
