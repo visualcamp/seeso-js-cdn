@@ -1027,6 +1027,7 @@ function getBinaryPromise() {
           if (!response["ok"]) {
             throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
           }
+          console.log('getbinary promise ')
           return response["arrayBuffer"]();
         })
         .catch(function() {
