@@ -12,7 +12,7 @@ if(typeof Module["locateFile"] == "undefined")
       dirJS = document.currentScript.src;
 
     dirRoot = dirJS.substring(0, dirJS.lastIndexOf("/") + 1);
-
+    console.log('locateFile :', dirRoot, path)
     return dirRoot + path;
   }
 if(typeof Module["thisProgram"] == "undefined")
