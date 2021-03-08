@@ -1002,9 +1002,11 @@ function createExportWrapper(name, fixedasm) {
     return asm[name].apply(null, arguments);
   };
 }
-var wasmBinaryFile = "gaze.wasm";
+// var wasmBinaryFile = "gaze.wasm";
+var wasmBinaryFile = "https://cdn.jsdelivr.net/gh/visualcamp/seeso-js-cdn/testFile/4/gaze.wasm";
 if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
+  console.log('wasmBinaryFile:', wasmBinaryFile);
 }
 function getBinary(file) {
   try {
