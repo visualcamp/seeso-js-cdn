@@ -1047,6 +1047,7 @@ function createWasm() {
       PThread.unusedWorkers.forEach(function(w) {
         console.log('도냐? 도냐? ')
         PThread.loadWasmModuleToWorker(w, function() {
+          console.log('load wasm module to worker finished! ')
           if (!--numWorkersToLoad) removeRunDependency("wasm-instantiate");
         });
       });
