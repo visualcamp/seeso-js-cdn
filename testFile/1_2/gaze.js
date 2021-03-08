@@ -1,5 +1,7 @@
 /* eslint-disable */
-// import gazeWorker from "worker-loader!./gaze.worker";
+import Worker from 'worker-loader!./Worker.js';
+import gazeWorker from "worker-loader!./gaze.worker";
+console.log('calllll file !')
 var Module = typeof Module !== "undefined" ? Module : {};
 var moduleOverrides = {};
 var key;
@@ -1660,9 +1662,7 @@ var PThread = {
     });
   },
   allocateUnusedWorker: function() {
-    // PThread.unusedWorkers.push(new gazeWorker);
-    var pthreadMainJs = locateFile("gaze.worker.js");
-    PThread.unusedWorkers.push(new Worker(pthreadMainJs));
+    PThread.unusedWorkers.push(new gazeWorker);
   },
   getNewWorker: function() {
     if (PThread.unusedWorkers.length == 0) {
@@ -6810,7 +6810,7 @@ var asmLibraryArg = {
 Asyncify.instrumentWasmImports(asmLibraryArg);
 console.log('asm init !')
 var asm = createWasm();
-// global.asminit = asm;
+// Module['createWasm'] = asm;
 var ___wasm_call_ctors = (Module["___wasm_call_ctors"] = createExportWrapper(
   "__wasm_call_ctors"
 ));
