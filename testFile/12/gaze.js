@@ -1556,7 +1556,7 @@ var PThread = {
   },
   receiveObjectTransfer: function(data) {},
   loadWasmModuleToWorker: function(worker, onFinishedLoading) {
-    console.log('loadWasmModuleToWorker')
+    console.log('loadWasmModuleToWorker :', worker)
     worker.onmessage = function(e) {
       console.log('onmessage : e? ', e)
       var d = e["data"];
