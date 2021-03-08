@@ -1656,7 +1656,7 @@ var PThread = {
       wasmModule instanceof WebAssembly.Module,
       "WebAssembly Module should have been loaded by now!"
     );
-    console.log('postMessage : e? ', e)
+    console.log('postMessage : ')
     worker.postMessage({
       cmd: "load",
       urlOrBlob: Module["mainScriptUrlOrBlob"] || _scriptDir,
